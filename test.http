@@ -1,0 +1,115 @@
+### SIGN UP (Normal User)
+POST http://localhost:5000/api/signup
+Content-Type: application/json
+
+{
+  "name": "Admin User",
+  "email": "admin@example.com",
+  "password": "Admin@1234",
+  "address": "123 User Lane"
+}
+
+### LOGIN
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "user2@example.com",
+  "password": "User2@1234"
+}
+
+
+### UPDATE TOKENS HERE
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6IjkwZGY0ZmFkLWYzYzktNGZlMi1hZDI1LTI5ZTY2ZWQyNTFjMCIsIm5hbWUiOiJOb3JtYWwgVXNlciAyIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDQ2MjU3MzUsImV4cCI6MTc0NDcxMjEzNX0.azU4wDRlZEYVHr0q8ZTvX4oW6U4oTZXu0qx5Zl9t65w
+@admin_token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6ImQ1Yzg5ZjNhLTUzOWItNDQxOS1hOTYwLTViN2YzOTljNTFjYiIsIm5hbWUiOiJBZG1pbiBVc2VyIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ0NjEwNzY3LCJleHAiOjE3NDQ2OTcxNjd9.nUBF49EFCFqicsg6ADTE9lqX02D4m0XRMeYXd15f_Ww
+@owner_token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im93bmVyQGV4YW1wbGUuY29tIiwidXNlcl9pZCI6Ijk2OTcyZTdhLTk5YzItNGJkZi1iZGIwLWI3YTk4Y2I3YjE4MiIsIm5hbWUiOiJTdG9yZSBPd25lciIsInJvbGUiOiJvd25lciIsImlhdCI6MTc0NDU1MDE5MSwiZXhwIjoxNzQ0NjM2NTkxfQ.KIsJZEQw5eB_FbKYyUArQ-NTiGGFe5NGDYY95RXlUfY
+
+### CHANGE PASSWORD
+PUT http://localhost:5000/api/change-password
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "old_password": "NewUser@1234",
+  "new_password": "User@1234",
+}
+
+### ADMIN LOGIN
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@1234"
+}
+
+### ADMIN TOTALS
+GET http://localhost:5000/api/admin/totals
+Authorization: Bearer {{admin_token}}
+
+### ADMIN ADD USER
+POST http://localhost:5000/api/admin/users
+Content-Type: application/json
+Authorization: Bearer {{admin_token}}
+
+{
+  "name": "Owner User",
+  "email": "owner2@example.com",
+  "password": "Owner@1234",
+  "address": "owner-2 address",
+  "role": "owner"
+}
+
+### ADMIN ADD STORE
+POST http://localhost:5000/api/admin/store
+Content-Type: application/json
+Authorization: Bearer {{admin_token}}
+
+{
+  "store_name": "Store-2",
+  "email": "store2@example.com",
+  "address": "789 Super St",
+  "owner_user_id": "15a7103a-be19-4881-99c1-326cb4a82d15"
+}
+
+### GET ADMIN STORES
+GET http://localhost:5000/api/admin/stores?search=&sort=store_name
+Authorization: Bearer {{admin_token}}
+
+### GET ADMIN USERS
+GET http://localhost:5000/api/admin/users?search=&sort=name
+Authorization: Bearer {{admin_token}}
+
+### GET USER STORES
+GET http://localhost:5000/api/user/stores?search=&sort=store_name
+Authorization: Bearer {{token}}
+
+### POST RATING
+POST http://localhost:5000/api/rating/e27d0dd7-0d57-4e8d-ad9f-d69897159e15
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rating": 5
+}
+
+### PUT RATING
+PUT http://localhost:5000/api/rating/e27d0dd7-0d57-4e8d-ad9f-d69897159e15
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rating": 4
+}
+
+### GET STORE USERS (Owner)
+GET http://localhost:5000/api/store/users?search=&sort=name
+Authorization: Bearer {{owner_token}}
+
+
+## Some Credentials
+admin     admin@example.com     Admin2@1234
+owner     owner@example.com     Owner@1234
+owner     owner2@example.com    Owner@1234
+user      user2@example.com      User2@1234
+user      user@example.com      NewUser@1234
